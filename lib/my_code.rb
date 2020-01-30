@@ -1,14 +1,23 @@
-# Your Code Here
 def map(source_array)
-  new_arr = []
-  idx = 0
-  while idx < source_array.length
-    new_arr << yield(new_arr[idx])
-    i += 1
-  end
-  new_arr
+  new_array = []
+  source_array.each { |element|
+    new_array << yield( element )
+    }
+  new_array
 end
 
-def reduce(source_array, initial = 0)
-  
+def reduce (array, sv=nil)
+
+  if sv
+    sum = sv
+    i = 0
+  else
+    sum = array[0]
+    i = 1
+  end
+  while i < array.size
+    sum = yield(sum, array[i])
+    i+= 1
+  end
+  sum
 end
